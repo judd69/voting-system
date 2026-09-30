@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting System</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; text-align: center; }
+        .candidate { margin: 15px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        .results { margin-top: 30px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Cast Your Vote</h1>
+    <form action="/vote" method="POST">
+        {% for candidate, count in votes.items() %}
+        <div class="candidate">
+            <h3>{{ candidate }}</h3>
+            <button type="submit" name="choice" value="{{ candidate }}">Vote</button>
+        </div>
+        {% endfor %}
+    </form>
+    
+    <div class="results">
+        <h2>Live Results</h2>
+        <p>Total Votes Cast: {{ total }}</p>
+        {% for candidate, count in votes.items() %}
+            <p>{{ candidate }}: {{ count }} votes</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
